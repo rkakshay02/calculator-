@@ -1,35 +1,46 @@
 # calculator-
-1. Project Overview:
-Start with a brief overview of your calculator project. Include a description of its purpose and functionalities. For example:
+from replit import clear
+from art import logo
 
-markdown
-Copy code
-# Calculator Project
+def add(n1, n2):
+  return n1 + n2
 
-This calculator project is a simple command-line calculator implemented in Python. It allows users to perform basic arithmetic operations such as addition, subtraction, multiplication, and division.
+def subtract(n1, n2):
+  return n1 - n2
 
-2. Project Structure:
-Outline the main components of your project, explaining the purpose of each file or directory. In this case, you might have a main Python script (calculator.py), and possibly additional files for external dependencies or configurations.
+def multiply(n1, n2):
+  return n1 * n2
 
+def divide(n1, n2):
+  return n1 / n2
 
+operations = {
+  "+": add,
+  "-": subtract,
+  "*": multiply,
+  "/": divide
+}
 
-- `calculator.py`: The main Python script containing the calculator functionality.
-- `README.md`: Documentation file providing information about the project.
-- (Optional) Other files or directories for external dependencies, configuration, etc.
-3. Instructions for Running the Calculator:
-Provide clear instructions on how to run and use your calculator. Include any dependencies that need to be installed and steps to execute the program.
-  1. Clone the repository to your local machine.
-  2. Install the required dependencies using: `pip install -r requirements.txt` (if you have any external dependencies).
-  3. Run the calculator script: `python calculator.py`.
-  4. Follow the on-screen prompts to perform calculations.
-   
-4. Code Explanation:
-Briefly explain the purpose of the main parts of your code, especially focusing on any unique or complex features.
+def calculator():
+  print(logo)
 
+  num1 = float(input("What's the first number?: "))
+  for symbol in operations:
+    print(symbol)
+  should_continue = True
+ 
+  while should_continue:
+    operation_symbol = input("Pick an operation: ")
+    num2 = float(input("What's the next number?: "))
+    calculation_function = operations[operation_symbol]
+    answer = calculation_function(num1, num2)
+    print(f"{num1} {operation_symbol} {num2} = {answer}")
 
-- `calculator.py`: This script defines basic arithmetic functions and implements a simple command-line calculator. It utilizes the `art` library for displaying an ASCII art logo and the `replit` library for clearing the console.
-5. Future Improvements:
-If you have plans for future improvements or features, mention them in this section.
+    if input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ") == 'y':
+      num1 = answer
+    else:
+      should_continue = False
+      clear()
+      calculator()
 
-- Implement support for more advanced mathematical operations.
-- Create a graphical user interface (GUI) for a more user-friendly exper
+calculator()
